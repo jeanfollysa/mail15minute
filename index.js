@@ -9,7 +9,12 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-// Routes
+// Route d'accueil pour Render ou visiteurs directs
+app.get('/', (req, res) => {
+  res.send('Bienvenue sur l’API Mail15Minute 🚀');
+});
+
+// Routes de l'application
 const emailRoutes = require('./routes/emailRoutes');
 app.use('/', emailRoutes);
 
