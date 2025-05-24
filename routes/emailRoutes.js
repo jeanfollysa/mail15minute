@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { connectDB } = require('../db');
+const connectDB = require('../db');
 const { v4: uuidv4 } = require('uuid');
 const domains = require('../utils/domains');
 const logger = require('../utils/logger');
