@@ -1,0 +1,204 @@
+/* Style global */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f5f5f5;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.container {
+  width: 100%;
+  max-width: 500px;
+  padding: 30px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+h1 {
+  font-size: 30px;
+  color: #4A90E2;
+  margin-bottom: 20px;
+}
+
+button {
+  background-color: #4A90E2;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 20px;
+}
+
+button:hover {
+  background-color: #357ABD;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Conteneur : minuterie + email + copier */
+.email-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 40px;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+/* Minuterie (bleue, avec bon espacement à droite) */
+.timer-container {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 5px solid #4A90E2;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  margin: 0;
+  margin-right: 10px; /* Espacement vers le cadre email */
+}
+
+.timer-text {
+  font-size: 24px;
+  font-weight: bold;
+  color: #4A90E2;
+  text-align: center;
+}
+
+/* Email */
+.email-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border: 2px solid #4A90E2;
+  width: auto;
+}
+
+.email-box {
+  font-size: 18px;
+  color: #4A90E2;
+  word-wrap: break-word;
+  word-break: break-word;
+  text-align: center;
+}
+
+/* Icône copier séparée */
+.copy-container {
+  margin-left: 10px;
+}
+
+.copy-btn {
+  display: inline-block;
+  background-color: #357ABD;
+  color: white;
+  font-size: 18px;
+  padding: 6px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.copy-btn:hover {
+  background-color: #2A6496;
+}
+
+.copy-btn i {
+  font-size: 20px;
+}
+
+/* Inbox */
+.inbox {
+  margin-top: 40px;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.message {
+  background-color: white;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  padding: 15px;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.message.unread {
+  font-weight: bold;
+  background-color: #f0f8ff;
+}
+
+.message .date {
+  font-size: 12px;
+  color: #888;
+}
+
+/* Responsivité */
+@media screen and (max-width: 600px) {
+  .container {
+    padding: 20px;
+    width: 90%;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  button {
+    font-size: 14px;
+  }
+
+  #emailDisplay {
+    font-size: 16px;
+  }
+}
+
+/* Toast notification */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #357ABD;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  z-index: 1000;
+  opacity: 0;
+  animation: toastAnimation 2s forwards;
+}
+
+@keyframes toastAnimation {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+}

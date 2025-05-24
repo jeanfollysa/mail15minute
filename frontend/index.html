@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mail15Minute</title>
+  <link rel="stylesheet" href="style.css"> <!-- Link to CSS file -->
+  <!-- FontAwesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Mail15Minute</h1>
+    <button id="generateBtn">🎲 Generate Email</button>
+    <button id="toggleHtmlBtn" disabled>Show HTML</button>
+
+    <!-- Email + Timer + Copier -->
+    <div class="email-wrapper">
+      <!-- Timer (cercle bleu) -->
+      <div id="timer-container" class="timer-container">
+        <span id="timer" class="timer-text">Time left: 15:00</span>
+      </div>
+
+      <!-- Email seul -->
+      <div class="email-container">
+        <p id="emailDisplay" class="email-box">No email generated</p>
+      </div>
+
+      <!-- Icône copier séparée -->
+      <div class="copy-container">
+        <button id="copyBtn" class="copy-btn" style="display:none;">
+          <i class="fas fa-copy"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Inbox -->
+    <div id="inbox" class="inbox">
+      <p>No messages yet.</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
