@@ -1,20 +1,22 @@
-const { MongoClient, ServerApiVersion } = require('mongodb');
+// db/index.js
+const { MongoClient } = require('mongodb');
+const logger = require('../utils/logger');
 
 const uri = process.env.MONGO_URI;
+const client = new MongoClient(uri);
 
-const client = new MongoClient(uri, {
-  serverApi: ServerApiVersion.v1,
-  tls: true,
-  tlsAllowInvalidCertificates: false
-});
+let db = null;
 
 async function connectDB() {
+  if (db) return db;
+
   try {
     await client.connect();
-    console.log("✅ Connexion MongoDB établie");
-    return client.db(); // nom de la base déduit automatiquement de l'URI
+    db = client.db('mail15minute'); // Spécifie bien le nom de la base
+    logger.info('✅ Connexion MongoDB réussie.');
+    return db;
   } catch (err) {
-    console.error("❌ Erreur MongoDB :", err);
+    logger.error('❌ Erreur MongoDB :', err);
     throw err;
   }
 }
