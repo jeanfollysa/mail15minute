@@ -12,6 +12,9 @@ async function connectDB() {
 
   try {
     await client.connect();
+    const adminDb = client.db().admin();
+    const dbList = await adminDb.listDatabases();
+    logger.info('💡 Bases trouvées sur ce cluster :', dbList);
     db = client.db('mail15minute');
     
     logger.info('✅ Connexion MongoDB réussie à la base :', db.databaseName);
