@@ -12,20 +12,13 @@ async function connectDB() {
 
   try {
     await client.connect();
-    const adminDb = client.db().admin();
-    const dbList = await adminDb.listDatabases();
-    logger.info('💡 Bases trouvées sur ce cluster :', dbList);
     db = client.db('mail15minute');
-    
     logger.info('✅ Connexion MongoDB réussie à la base :', db.databaseName);
-
-    logger.info('🔵 Objet db retourné:', db, 'Nom:', db && db.databaseName);
     return db;
   } catch (err) {
     logger.error('❌ Erreur MongoDB :', err);
     throw err;
   }
 }
-
 
 module.exports = connectDB;

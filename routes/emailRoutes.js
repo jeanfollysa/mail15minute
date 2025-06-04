@@ -1,5 +1,3 @@
-console.log('=== EmailRoutes chargé ! ==='); // 👈 tout en haut du fichier
-
 const express = require('express');
 const router = express.Router();
 const connectDB = require('../db');
@@ -11,28 +9,23 @@ const expirationTimeInMinutes = parseInt(process.env.EXPIRATION_MINUTES) || 15;
 
 // Générer une adresse email temporaire
 router.get('/create-email', async (req, res) => {
-    console.log('===> /create-email route hit <===');
   try {
     const db = await connectDB();
-    // LOG : que vaut db réellement ?
-    console.log('🔎 [DEBUG] db après connexion:', db, 'type:', typeof db, 'collection existe ?', db && db.collection);
 
     if (!db) {
-      console.error('❌ La base de données est undefined !');
+      logger.error('❌ La base de données est undefined !');
       return res.status(500).json({ error: 'Erreur connexion DB' });
     }
 
     if (!db.collection || typeof db.collection !== 'function') {
-      console.error('❌ La méthode collection n\'existe pas sur db !', db);
+      logger.error('❌ La méthode collection n\'existe pas sur db !');
       return res.status(500).json({ error: 'La méthode collection est manquante sur db' });
     }
 
     const emails = db.collection('emails');
-    // LOG : que vaut emails réellement ?
-    console.log('🔎 [DEBUG] Type de emails :', typeof emails, 'Propriétés :', emails && Object.keys(emails));
 
     if (!emails || typeof emails.insertOne !== 'function') {
-      console.error('❌ Collection emails non trouvée ou inaccessible !');
+      logger.error('❌ Collection emails non trouvée ou inaccessible !');
       return res.status(500).json({ error: 'Erreur accès collection emails' });
     }
 
@@ -41,10 +34,10 @@ router.get('/create-email', async (req, res) => {
     const email = `${localPart}@${domain}`;
     await emails.insertOne({ address: email, createdAt: new Date() });
 
-    console.log(`Nouvelle adresse générée : ${email}`);
+    logger.info(`Nouvelle adresse générée : ${email}`);
     res.json({ email });
   } catch (err) {
-    console.error('❌ Erreur lors de la création de l\'email temporaire :', err);
+    logger.error('❌ Erreur lors de la création de l\'email temporaire :', err);
     res.status(500).json({ error: 'Erreur création email temporaire' });
   }
 });
